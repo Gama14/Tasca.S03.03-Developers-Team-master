@@ -3,7 +3,7 @@ package Nivel2;
 public class Articulo {
 
     //atributos
-    protected static int id = 0;
+
     protected int idArticulo;
     protected String nombre;
     protected double precio;

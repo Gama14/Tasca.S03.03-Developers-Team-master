@@ -32,17 +32,13 @@ public class Ticket {
     }
 
     //metodos de tickets
-    public void addArticuloAlTicket (Articulo articulo) throws SQLException{
+    public void addArticuloAlTicket (Articulo articulo){
         listaArticulos.add(articulo);
 
     }
     public void imprimirTicket(){
         listaArticulos.forEach(x->System.out.println("ID: "+x.getTipo()+x.getID()+" / Nombre: "+x.getNombre()+" / Precio: €"+x.getPrecio()));
-    }
-
-    //metodos de compra-venta
-    public void mostrarCompra(){
-        listaArticulos.forEach(x-> System.out.println("ID: " + x.getTipo() +x.getID()+" / Nombre: "+x.getNombre()+" / "+x.getPrecio()));
+        System.out.println("Precio total: " + totalPrecioTicket()+ " €");
     }
     public double totalPrecioTicket(){
         double totalVentas=0;

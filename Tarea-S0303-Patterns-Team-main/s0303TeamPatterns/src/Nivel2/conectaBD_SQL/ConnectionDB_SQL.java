@@ -8,7 +8,7 @@ public class ConnectionDB_SQL {
         final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
         final String URL = "jdbc:mysql://localhost:3306/floristeria";
         final String USUARIO = "root";
-        final String CLAVE = "Sg7535sg";
+        final String CLAVE = "S-garciam14";
 
         public Connection conectar () {
             Connection myConnection = null;

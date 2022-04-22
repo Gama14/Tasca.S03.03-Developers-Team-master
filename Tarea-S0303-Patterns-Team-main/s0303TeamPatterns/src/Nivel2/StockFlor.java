@@ -19,7 +19,9 @@ public class StockFlor extends Stock {
         dbFlor.add(new Flor(nombre,precio,color));
         try {
             Statement st = cn.createStatement();
+            //lo inserta en la tabla de flores
             PreparedStatement miSentencia = cn.prepareStatement("INSERT INTO flores (tipo, idArticulo,nombre, precio, color) VALUES(?,?,?,?,?)");
+            //lo inserta en la tabla articulo, lo hace para el ticket
             PreparedStatement miSentencia2 = cn.prepareStatement("INSERT INTO articulos (tipo, idArticulo,nombre, precio) VALUES(?,?,?,?)");
             miSentencia.setString(1, "F");
             miSentencia.setString(2, null);
@@ -50,8 +52,9 @@ public class StockFlor extends Stock {
             }
         }
         try {
+            //elimina de la tabla de flores, pero no de la de articulos
             PreparedStatement miSentencia = cn.prepareStatement("DELETE FROM flores  WHERE idArticulo=? ");
-
+            //al idRticulo? le pone el valor de lo que viene x consola
             miSentencia.setInt(1, idArticulo);
 
             miSentencia.executeUpdate();

@@ -4,7 +4,6 @@ import Nivel2.conectaBD_SQL.ConnectionDB_SQL;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class AppMenu {
 
@@ -64,7 +63,7 @@ public class AppMenu {
                    if (existeFloristeria(floristeria)){ //comprueba que existe la floristeria
                        tipoArticulo=teclado.ingresarString("Que tipo de artículo quieres añadir (A,F,D):");
                        if (tipoLetra(tipoArticulo)){ //comprueba que la letra ingresada es correcta
-                           getFloristeriaMenu(floristeria).getStock(tipoArticulo).crearArticulo(); //crea y añade al stock un articulo
+                           getFloristeria(floristeria).getStock(tipoArticulo).crearArticulo(); //crea y añade al stock un articulo
                            msjArticuloCreado();
 
                        }else{
@@ -80,7 +79,7 @@ public class AppMenu {
                     if (existeFloristeria(floristeria)){ //comprueba que existe la floristeria
                         tipoArticulo=teclado.ingresarString("Que tipo de artículo quieres añadir (A,F,D):");
                         if (tipoLetra(tipoArticulo)){ //comprueba que la letra ingresada es correcta
-                            getFloristeriaMenu(floristeria).getStock(tipoArticulo).eliminarArticulo(teclado.ingresarInt("Ingrese el id del artículo:")); //elimina del stock un articulo
+                            getFloristeria(floristeria).getStock(tipoArticulo).eliminarArticulo(teclado.ingresarInt("Ingrese el id del artículo:")); //elimina del stock un articulo
                             msjArticuloEliminado();
                         }else{
                             msjLetraErronea();
@@ -93,14 +92,14 @@ public class AppMenu {
                     //imprimir stock
                     floristeria = teclado.ingresarString("En que floristería quieres realizar la acción?");
                     if (existeFloristeria(floristeria)){
-                        getFloristeriaMenu(floristeria).imprimirStocks();
+                        getFloristeria(floristeria).imprimirStocks();
                     }
                    break;
                 case 5:
                     //imprimir cantidades de stock
                     floristeria = teclado.ingresarString("En que floristería quieres realizar la acción?");
                     if (existeFloristeria(floristeria)){
-                        getFloristeriaMenu(floristeria).mostrarCantidadStock();
+                        getFloristeria(floristeria).mostrarCantidadStock();
                     }
                     break;
                 case 6 :
@@ -108,7 +107,7 @@ public class AppMenu {
                     floristeria = teclado.ingresarString("En que floristería quieres realizar la acción?");
                     Floristeria floristeria1;
                     if (existeFloristeria(floristeria)){
-                        floristeria1=getFloristeriaMenu(floristeria);
+                        floristeria1= getFloristeria(floristeria);
                         floristeria1.addArtiuclosTicket(floristeria1);
                     }
                     break;
@@ -116,21 +115,21 @@ public class AppMenu {
                     //mostrar todos los tickets
                     floristeria = teclado.ingresarString("En que floristeria quieres realizar la acción?");
                     if (existeFloristeria(floristeria)){
-                        getFloristeriaMenu(floristeria).mostrarTickets();
+                        getFloristeria(floristeria).mostrarTickets();
                     }
                     break;
                 case 8 :
                     //valor total del stock anual
                     floristeria = teclado.ingresarString("En que floristeria quieres realizar la acción?");
                     if (existeFloristeria(floristeria)){
-                        getFloristeriaMenu(floristeria).sumatoriaValorStock();
+                        getFloristeria(floristeria).sumatoriaValorStock();
                     }
                     break;
                 case 9 :
                     //valor total de las ventas
                     floristeria = teclado.ingresarString("En que floristeria quieres realizar la acción?");
                     if (existeFloristeria(floristeria)){
-                        getFloristeriaMenu(floristeria).mostrarSumatorioVentas();
+                        getFloristeria(floristeria).mostrarSumatorioVentas();
                     }
                     break;
                 case 0 :
@@ -153,7 +152,20 @@ public class AppMenu {
             System.out.println("La floristeria ya existe");
         }
     }
-
+    // getter floristeria
+    static Floristeria getFloristeria(String nombre){
+        int i = 0;
+        Floristeria f1= null;
+        while (i<dbFloristerias.size()&& i>=0) {
+            if (nombre.equalsIgnoreCase(dbFloristerias.get(i).getNombre())) {
+                f1 = dbFloristerias.get(i);
+                i=-1;
+            } else {
+                i++;
+            }
+        }
+        return f1;
+    }
     // COMPROBACIONES
     static boolean existeFloristeria(String nombre) {
         boolean floristeriaEnApp = false;
@@ -169,19 +181,7 @@ public class AppMenu {
 
         return floristeriaEnApp;
     }
-    static Floristeria getFloristeriaMenu(String nombre){
-        int i = 0;
-        Floristeria f1= null;
-        while (i<dbFloristerias.size()&& i>=0) {
-            if (nombre.equalsIgnoreCase(dbFloristerias.get(i).getNombre())) {
-                f1 = dbFloristerias.get(i);
-                i=-1;
-            } else {
-                i++;
-            }
-        }
-        return f1;
-    }
+
     static boolean tipoLetra (String nombre){
        boolean letraAdecuada= false;
        if(nombre.equalsIgnoreCase("a")||nombre.equalsIgnoreCase("d")||nombre.equalsIgnoreCase("f")){

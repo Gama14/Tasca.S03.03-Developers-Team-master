@@ -68,17 +68,17 @@ public class Floristeria implements IFloristeria {
 
     //Metodos de Stock
     public void imprimirStocks (){
-        stockArbol.imprimirStock();  //recursividad
+        stockArbol.imprimirStock();
         stockDecoracion.imprimirStock();
         stockFlor.imprimirStock();
     }
     public void mostrarCantidadStock() {
-        stockArbol.mostrarCantidadStock();  //recursividad
+        stockArbol.mostrarCantidadStock();
         stockDecoracion.mostrarCantidadStock();
         stockFlor.mostrarCantidadStock();
     }
     public void sumatoriaValorStock(){
-        double sA=  stockArbol.sumatoriaValorStock();  //recursividad
+        double sA=  stockArbol.sumatoriaValorStock();
         double sD= stockDecoracion.sumatoriaValorStock();
         double sF= stockFlor.sumatoriaValorStock();
         double total = sA+sD+sF;
@@ -103,11 +103,14 @@ public class Floristeria implements IFloristeria {
             if(existeArticulo(idArticulo,tipoArticulo)) {
                 switch (tipoArticulo.toLowerCase()) {
                     case "a":
+                        //añade el articulo al ticket
                         t1.addArticuloAlTicket(floristeria.stockArbol.getArticulo(idArticulo, tipoArticulo));
+                        //añade el articulo al array ventas
                         ventas.add(floristeria.stockArbol.getArticulo(idArticulo, tipoArticulo));
 
                         try {
                             Statement st = cn.createStatement();
+                            //añadirá el articulo a la tabla ventas
                             PreparedStatement miSentencia = cn.prepareStatement("INSERT INTO ventas (idTicket, tipoArticulo, idArticulo, nombreArticulo,precioArticulo)" +
                                     " VALUES(?,?,?,?,?)");
                             miSentencia.setString(1, null);
