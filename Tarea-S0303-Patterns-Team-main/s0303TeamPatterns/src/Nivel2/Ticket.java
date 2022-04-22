@@ -32,7 +32,7 @@ public class Ticket {
     }
 
     //metodos de tickets
-    public void addArticuloAlTicket (Articulo articulo){
+    public void addArticuloAlTicket (Articulo articulo) throws SQLException{
         listaArticulos.add(articulo);
 
     }
